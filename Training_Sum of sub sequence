@@ -1,0 +1,51 @@
+// Training1.cpp : 定义控制台应用程序的入口点。
+//
+
+#include "stdafx.h"
+#include "time.h"
+#include "stdlib.h"
+#include "windows.h"
+int _tmain(int argc, _TCHAR* argv[])
+{
+	int *arr,*ptr,this_sum,max_sum,n,o,i;
+	n=10;
+	arr=(int*)malloc(64*sizeof(arr));
+	ptr=arr;
+	srand((unsigned int)time(NULL));
+	for(i=0;i<n;i++)
+	{
+		*ptr=100-(rand()%200);//生成n个（-100，100）整数序列
+		ptr++;
+	}
+	ptr=arr;//指针复位
+	for(i=0;i<n;i++)
+	{
+		printf("%d\n",*ptr);
+		ptr++;
+	}
+	ptr=arr;//指针复位
+	this_sum=*ptr;
+	max_sum=*ptr;
+	for(i=0;i<n;i++)
+	{
+		if(this_sum>max_sum)
+			{
+				max_sum=this_sum;
+			}
+		this_sum=*ptr;
+		for(o=1;o<n-i;o++)
+		{
+			if(this_sum>max_sum)
+			{
+				max_sum=this_sum;
+			}
+			this_sum+=*(ptr+o);
+		}
+		ptr++;
+	}
+	ptr=arr;//指针复位
+	printf("Max sub sequence is %d",max_sum);
+	free(arr);
+	getchar();
+	return 0;
+}
