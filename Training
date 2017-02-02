@@ -1,0 +1,48 @@
+// Training1.cpp : 定义控制台应用程序的入口点。
+//一个简单的冒泡
+#include "stdafx.h"
+#include "time.h"
+#include "stdlib.h"
+#include "windows.h"
+int _tmain(int argc, _TCHAR* argv[])
+{
+	int *a,*b,*ptr,i,o,t;
+	a=(int*)malloc(64*sizeof(int));
+	ptr=a;
+	srand((unsigned int)time(NULL));
+	for(i=0;i<64;i++)
+	{
+		*ptr=rand()%100;
+		ptr++;
+	}
+	ptr=a;//指针复位
+	for(i=0;i<64;i++)
+	{
+		printf("%d\n",*ptr);//输出未排序整数列
+		ptr++;
+	}
+	ptr=a;//指针复位
+	printf("///////////////////////////////////\n");//分界线
+	for(i=0;i<64;i++)
+	{
+		for(o=1;o<64-i;o++)
+		{
+			if(*ptr<=*(ptr+o))
+			{
+				t=*ptr;
+				*ptr=*(ptr+o);//冒泡
+				*(ptr+o)=t;
+			}
+		}
+		ptr++;
+	}
+	ptr=a;//指针复位
+	for(i=0;i<64;i++)
+	{
+		printf("%d\n",*ptr);//输出排序整数列
+		ptr++;
+	}
+	free(a);//内存释放
+	getchar();
+	return 0;
+}
